@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "shortener.apps.ShortenerConfig"
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
+ADMIN_PANEL_WEBSITE_TITLE = "Shortener Admin"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
