@@ -10,6 +10,7 @@ python-decouple = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
 django-redis = "*"
+whitenoise = "*"
 
 [dev-packages]
 autopep8 = "*"
