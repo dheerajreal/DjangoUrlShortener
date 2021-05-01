@@ -11,6 +11,7 @@ psycopg2 = "*"
 psycopg2-binary = "*"
 django-redis = "*"
 whitenoise = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 autopep8 = "*"
