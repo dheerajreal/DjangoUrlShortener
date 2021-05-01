@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 gunicorn = "*"
 python-decouple = "*"
+psycopg2 = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 autopep8 = "*"
