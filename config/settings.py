@@ -106,6 +106,26 @@ elif DB_ENGINE == "psql":
     }
 
 
+# cache stuff
+REDIS_CACHE_URL = config(
+    'REDIS_CACHE_URL',
+    default="redis://127.0.0.1:6379/1",
+)
+if REDIS_CACHE_URL:
+    # cache backends
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_CACHE_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            }
+        },
+    }
+    # put sessions in cache
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+    SESSION_CACHE_ALIAS = 'default'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
