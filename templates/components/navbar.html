@@ -16,7 +16,7 @@
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">
+                    <a class="nav-link text-white" href="{% url 'logout' %}">
                         <i class="gg-log-off float-left"></i>
                         <span class="ml-2"> Logout</span>
                     </a>
@@ -26,14 +26,14 @@
                 {% else %}
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">
+                    <a class="nav-link text-white" href="{% url 'signup' %}">
                         <i class="gg-user-add float-left"></i>
                         <span class="ml-2"> Signup</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">
+                    <a class="nav-link text-white" href="{% url 'login' %}">
                         <i class="gg-user float-left"></i>
                         <span class="ml-2"> Login</span>
                     </a>
