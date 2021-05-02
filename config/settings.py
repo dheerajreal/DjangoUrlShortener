@@ -165,6 +165,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# login redirects
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
+
 # DJANGO-CRISPY-FORMS CONFIGS
 # https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = "bootstrap4"
