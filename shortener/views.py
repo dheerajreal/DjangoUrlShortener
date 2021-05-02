@@ -14,7 +14,7 @@ User = get_user_model()
 
 
 def resolve(request, urltag):
-    if len(urltag) < settings.URLTAG_LENGTH:
+    if len(urltag) < settings.URLTAG_MAX_LENGTH:
         # don't check database if not required
         raise Http404
     url_record = get_object_or_404(UrlRecord, pk=urltag)
