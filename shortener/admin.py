@@ -19,10 +19,11 @@ class UrlRecordAdmin(admin.ModelAdmin):
         "short_url",
         "date_created",
         "date_expiry",
-        "user"
+        "user",
+        "is_expired",
     ]
     # can filter by date_created and date_expiry
-    list_filter = ["date_created", "date_expiry"]
+    list_filter = ["date_created", "date_expiry", ]
     #  allow search
     search_fields = ["original_url", "short_url"]
 

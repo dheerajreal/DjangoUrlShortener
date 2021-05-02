@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -20,6 +21,10 @@ class UrlRecord(models.Model):
     )
     date_created = models.DateField(blank=True, auto_now_add=True)
     date_expiry = models.DateField()
+
+    @property
+    def is_expired(self):
+        return self.date_expiry < timezone.now().date()
 
     def __str__(self):
         return self.original_url

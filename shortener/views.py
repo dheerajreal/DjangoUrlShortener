@@ -18,6 +18,8 @@ def resolve(request, urltag):
         # don't check database if not required
         raise Http404
     url_record = get_object_or_404(UrlRecord, pk=urltag)
+    if url_record.is_expired:
+        raise Http404
     original_url = url_record.original_url
     return redirect(original_url)
 
@@ -27,6 +29,8 @@ def detail(request, urltag):
         # don't check database if not required
         raise Http404
     url_record = get_object_or_404(UrlRecord, pk=urltag)
+    if url_record.is_expired:
+        raise Http404
     urltag = url_record.short_url
     context = {
         "url_record": url_record,
