@@ -28,7 +28,7 @@ class UserEmailEdit(LoginRequiredMixin, generic.UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse_lazy("user_detail", args=[self.request.user.username])
+        return reverse_lazy("user_detail")
 
 
 class UserProfileUpdate(LoginRequiredMixin, generic.UpdateView):
@@ -40,7 +40,7 @@ class UserProfileUpdate(LoginRequiredMixin, generic.UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse_lazy("user_detail", args=[self.request.user.username])
+        return reverse_lazy("user_detail")
 
 
 @login_required
