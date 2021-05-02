@@ -3,20 +3,24 @@
 {% block content %}
 
 <div class="container">
-
-    <br> {% if form %}
-    <form class="form-group" action="" method="post">
-        {% csrf_token %}
-        <br> {{ form|crispy }}
-        <br>
-        <button class="btn btn-primary " type="submit">
-            Shorten
-        </button>
-        <br>
-    </form>
-    {% else %}
-    <br>
-    <p class="text-danger">an error occurred</p>
-    {% endif %}
+    <div class="shadow card border-primary mt-4 col-12 col-md-10 col-lg-8 mx-auto">
+        <div class="card-body">
+            <h4 class="card-title">Enter URL to shorten</h4>
+            <br> {% if form %}
+            <form class="form-group" action="" method="post">
+                {% csrf_token %}
+                <br> {{ form|crispy }}
+                <br>
+                <button class="btn btn-primary btn-block " type="submit">
+                    Shorten
+                </button>
+                <br>
+            </form>
+            {% else %}
+            <br>
+            <p class="text-danger">an error occurred</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
