@@ -2,7 +2,7 @@
 <nav class="navbar shadow mb-4 navbar-expand-lg navbar-dark bg-primary static-top">
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">
-            <i class="gg-album text-white float-left"></i>
+            <i class="gg-disc text-white float-left"></i>
 
         </a>
         <a class="navbar-brand " href="{% url 'index' %}">
@@ -17,9 +17,16 @@
                 {% if user.is_authenticated %}
 
                 <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'urls_by_user_list_view' %}">
+                        <i class="gg-album float-left"></i>
+                        <span class="mx-2"> My urls</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'user_detail' %}">
                         <i class="gg-profile float-left"></i>
-                        <span class="ml-2"> Profile</span>
+                        <span class="mx-2"> Profile</span>
                     </a>
                 </li>
 
@@ -29,14 +36,14 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'signup' %}">
                         <i class="gg-user-add float-left"></i>
-                        <span class="ml-2"> Signup</span>
+                        <span class="mx-2"> Signup</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'login' %}">
                         <i class="gg-user float-left"></i>
-                        <span class="ml-2"> Login</span>
+                        <span class="mx-2"> Login</span>
                     </a>
                 </li>
                 {% endif %}
