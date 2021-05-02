@@ -1,0 +1,45 @@
+<!-- Navigation -->
+<nav class="navbar shadow mb-4 navbar-expand-lg navbar-dark bg-primary static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <i class="gg-album text-white float-left"></i>
+
+        </a>
+        <a class="navbar-brand " href="{% url 'index' %}">
+            <b class="text-white pl-4"> URL Shortener</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="gg-log-off float-left"></i>
+                        <span class="ml-2"> Logout</span>
+                    </a>
+                </li>
+                 
+
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="gg-user-add float-left"></i>
+                        <span class="ml-2"> Signup</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        <i class="gg-user float-left"></i>
+                        <span class="ml-2"> Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
