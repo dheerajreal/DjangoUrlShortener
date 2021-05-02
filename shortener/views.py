@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from . import utils
 from .forms import UrlForm
 from .models import UrlRecord
+from django.utils import timezone
 
 # Create your views here.
 User = get_user_model()
@@ -78,3 +79,16 @@ class UrlsByUserListView(LoginRequiredMixin, ListView):
 
 
 urls_by_user_list_view = UrlsByUserListView.as_view()
+
+
+class ExpiredUrlsByUserListView(LoginRequiredMixin, ListView):
+    template_name = "shortener/list.html"
+
+    def get_queryset(self):
+        return UrlRecord.objects.filter(
+            user=self.request.user
+        ).filter(
+            date_expiry__lt=timezone.now().date()
+        )
+
+expired_urls_by_user_list_view = ExpiredUrlsByUserListView.as_view()
