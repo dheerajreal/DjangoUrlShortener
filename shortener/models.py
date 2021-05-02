@@ -18,7 +18,7 @@ class UrlRecord(models.Model):
         null=True,
         on_delete=models.CASCADE
     )
-    date_created = models.DateField(auto_now_add=True)
+    date_created = models.DateField(blank=True, auto_now_add=True)
     date_expiry = models.DateField()
 
     def __str__(self):
