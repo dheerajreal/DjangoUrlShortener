@@ -33,7 +33,14 @@ class UrlRecordCreate(CreateView):
         except User.DoesNotExist:
             user = None
         form.instance.user = user
-        form.instance.date_expiry = utils.get_date_one_week_from_today()
+        if user:
+            if user.is_staff:  # one year if staff
+                form.instance.date_expiry = utils.get_date_one_year_from_today()
+            else:  # three months if authenticated
+                form.instance.date_expiry = utils.get_date_three_months_from_today()
+        else:  # one week if not authenticated
+            form.instance.date_expiry = utils.get_date_one_week_from_today()
+
         form.instance.short_url = utils.get_random_generated_shortcode()
         return super().form_valid(form)
 

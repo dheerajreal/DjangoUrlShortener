@@ -28,7 +28,6 @@ urlpatterns += [
     path('profile_update/', UserProfileUpdate.as_view(),
          name='user_profile_update'),
     path('email_update/', UserEmailEdit.as_view(), name='user_email_update'),
-    path('profile/', user_profile_details,
-         name="user_detail"),
+    path('profile/', user_profile_details, name="user_detail"),
 
 ]
