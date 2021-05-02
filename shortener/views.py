@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.urls import reverse_lazy
 from . import utils
 from .forms import UrlForm
@@ -68,3 +68,13 @@ class UrlRecordCreate(CreateView):
 
 
 url_record_create = UrlRecordCreate.as_view()
+
+
+class UrlsByUserListView(LoginRequiredMixin, ListView):
+    template_name = "shortener/list.html"
+
+    def get_queryset(self):
+        return UrlRecord.objects.filter(user=self.request.user)
+
+
+urls_by_user_list_view = UrlsByUserListView.as_view()

@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<div class="container">
+    <div class="mt-4 mx-auto">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Original URL</th>
+                    <th scope="col">Date created</th>
+                    <th scope="col">Date expiry</th>
+                    <th scope="col">Is expired</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Short URL</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                 {% if object.is_expired %}<tr class="table-danger"> {% else %}<tr>{% endif %}
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td> {{object.original_url}} </td>
+                    <td> {{object.date_created}} </td>
+                    <td> {{object.date_expiry}} </td>
+                    <td> {{object.is_expired}} </td>
+                    <td> <a href="{% url 'url_detail' object.short_url %}">{{object.short_url}}</a> </td>
+                    <td> <a href="{% url 'resolve' object.short_url %}">{{object.short_url}}</a> </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+{% endblock %}
