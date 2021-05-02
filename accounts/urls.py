@@ -1,7 +1,7 @@
 from django.contrib.auth import views
 from django.urls import path
 
-from .views import SignUp, UserEmailEdit, UserProfileUpdate
+from .views import SignUp, UserEmailEdit, UserProfileUpdate, user_profile_details
 
 urlpatterns = [
     path('login/', views.LoginView.as_view(), name='login'),
@@ -28,4 +28,7 @@ urlpatterns += [
     path('profile_update/', UserProfileUpdate.as_view(),
          name='user_profile_update'),
     path('email_update/', UserEmailEdit.as_view(), name='user_email_update'),
+    path('profile/', user_profile_details,
+         name="user_detail"),
+
 ]

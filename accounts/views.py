@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, Http404
 
 # Create your views here.
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -39,3 +41,13 @@ class UserProfileUpdate(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("user_detail", args=[self.request.user.username])
+
+
+@login_required
+def user_profile_details(request):
+    template_name = "accounts/profile.html"
+    user = request.user
+    context = {
+        "user": user
+    }
+    return render(request, template_name, context)
