@@ -2,9 +2,9 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView
-
+from django.urls import reverse_lazy
 from . import utils
 from .forms import UrlForm
 from .models import UrlRecord
@@ -22,10 +22,28 @@ def resolve(request, urltag):
     return redirect(original_url)
 
 
+def detail(request, urltag):
+    if len(urltag) < settings.URLTAG_MAX_LENGTH:
+        # don't check database if not required
+        raise Http404
+    url_record = get_object_or_404(UrlRecord, pk=urltag)
+    urltag = url_record.short_url
+    context = {
+        "url_record": url_record,
+        "urltag": urltag
+    }
+    return render(request, "shortener/detail.html", context)
+
+
 class UrlRecordCreate(CreateView):
     form_class = UrlForm
     template_name = 'shortener/index.html'
-    success_url = "/"
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'url_detail',
+            kwargs={"urltag": self.object.short_url}
+        )
 
     def form_valid(self, form):
         try:

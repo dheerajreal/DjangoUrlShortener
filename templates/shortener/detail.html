@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="container">
+    <div class="shadow card border-primary mt-4 col-12 col-md-10 col-lg-8 mx-auto">
+        <div class="card-body">
+            <h4 class="card-title">Here's your short URL</h4>
+
+            <br> {% if urltag %}
+            <br>
+            <p>Link: <a href="{% url 'resolve' urltag %}">to target</a></p>
+            <br>
+            <p>Short URL: {{ request.scheme }}://{{request.get_host}}/{{urltag}}</p>
+            <br>
+            <p>Original URL: {{ url_record}}</p>
+            <br>
+            <p>Valid until: {{url_record.date_expiry}}</p>
+            <br />
+            {% else %}
+            <br>
+
+            <p class="text-danger">an error occurred</p>
+            <br>{% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
