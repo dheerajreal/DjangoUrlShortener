@@ -22,13 +22,17 @@ def resolve(request, urltag):
     return redirect(original_url)
 
 
-class UrlRecordCreate(LoginRequiredMixin, CreateView):
+class UrlRecordCreate(CreateView):
     form_class = UrlForm
     template_name = 'shortener/index.html'
     success_url = "/"
 
     def form_valid(self, form):
-        form.instance.user = User.objects.get(username=self.request.user)
+        try:
+            user = User.objects.get(username=self.request.user)
+        except User.DoesNotExist:
+            user = None
+        form.instance.user = user
         form.instance.date_expiry = utils.get_date_one_week_from_today()
         form.instance.short_url = utils.get_random_generated_shortcode()
         return super().form_valid(form)
