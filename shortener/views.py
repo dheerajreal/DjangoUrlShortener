@@ -14,6 +14,13 @@ from django.utils import timezone
 User = get_user_model()
 
 
+def create_urltag():
+    urltag = utils.get_random_generated_shortcode()
+    qs_exists = UrlRecord.objects.filter(short_url=urltag).exists()
+    if not qs_exists:
+        return urltag 
+    return create_urltag()
+
 def resolve(request, urltag):
     if len(urltag) < settings.URLTAG_MAX_LENGTH:
         # don't check database if not required
@@ -64,7 +71,7 @@ class UrlRecordCreate(CreateView):
         else:  # one week if not authenticated
             form.instance.date_expiry = utils.get_date_one_week_from_today()
 
-        form.instance.short_url = utils.get_random_generated_shortcode()
+        form.instance.short_url = create_urltag()
         return super().form_valid(form)
 
 
