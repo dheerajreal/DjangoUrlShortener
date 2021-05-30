@@ -10,7 +10,7 @@ class UrlRecord(models.Model):
     short_url = models.CharField(
         primary_key=True,
         editable=False,
-        max_length=settings.URLTAG_MAX_LENGTH
+        max_length=settings.URLTAG_LENGTH
     )
     original_url = models.URLField(blank=False, null=False)
     user = models.ForeignKey(

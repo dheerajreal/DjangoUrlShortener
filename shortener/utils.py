@@ -21,5 +21,5 @@ def get_date_one_year_from_today():
     return get_future_date_from_today(days=365)
 
 
-def get_random_generated_shortcode(k=settings.URLTAG_MAX_LENGTH):
+def get_random_generated_shortcode(k=settings.URLTAG_LENGTH):
     return get_random_string(k)

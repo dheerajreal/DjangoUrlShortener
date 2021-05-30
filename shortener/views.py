@@ -22,7 +22,7 @@ def create_urltag():
     return create_urltag()
 
 def resolve(request, urltag):
-    if len(urltag) < settings.URLTAG_MAX_LENGTH:
+    if len(urltag) != settings.URLTAG_LENGTH:
         # don't check database if not required
         raise Http404
     url_record = get_object_or_404(UrlRecord, pk=urltag)
@@ -33,7 +33,7 @@ def resolve(request, urltag):
 
 
 def detail(request, urltag):
-    if len(urltag) < settings.URLTAG_MAX_LENGTH:
+    if len(urltag) != settings.URLTAG_LENGTH:
         # don't check database if not required
         raise Http404
     url_record = get_object_or_404(UrlRecord, pk=urltag)
