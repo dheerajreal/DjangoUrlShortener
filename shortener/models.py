@@ -34,3 +34,9 @@ class UrlRecord(models.Model):
         return cls.objects.filter(user=None).filter(
             date_expiry__lt=timezone.now().date()
         )
+
+    @classmethod
+    def delete_expired_anon_urlrecords(cls):
+        qs = cls.get_expired_anon_urlrecords()
+        qs.delete()
+        return None
