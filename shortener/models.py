@@ -22,9 +22,15 @@ class UrlRecord(models.Model):
     date_created = models.DateField(blank=True, auto_now_add=True)
     date_expiry = models.DateField()
 
+    def __str__(self):
+        return self.original_url
+
     @property
     def is_expired(self):
         return self.date_expiry < timezone.now().date()
 
-    def __str__(self):
-        return self.original_url
+    @classmethod
+    def get_expired_anon_urlrecords(cls):
+        return cls.objects.filter(user=None).filter(
+            date_expiry__lt=timezone.now().date()
+        )
