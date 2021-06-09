@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
+import dj_database_url
 from pathlib import Path
 
 from decouple import Csv, config
@@ -115,7 +117,7 @@ elif DB_ENGINE == "psql":
 # cache stuff
 REDIS_CACHE_URL = config(
     'REDIS_CACHE_URL',
-    default="redis://127.0.0.1:6379/1",
+    default=None,
 )
 if REDIS_CACHE_URL:
     # cache backends
@@ -190,3 +192,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATABASE_URL = config('DATABASE_URL', default=None)
+
+if DATABASE_URL:
+    db_from_env = dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=500,
+        ssl_require=True
+    )
+    DATABASES['default'].update(db_from_env)

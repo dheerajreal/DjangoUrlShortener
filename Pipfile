@@ -13,6 +13,7 @@ django-redis = "*"
 whitenoise = "*"
 django-crispy-forms = "*"
 django-extensions = "*"
+dj-database-url = "*"
 
 [dev-packages]
 autopep8 = "*"
